@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Research & Prototype Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .progress-step {
+            transition: all 0.3s ease-in-out;
+        }
+        .progress-step.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .progress-step.completed {
+            background-color: #10b981;
+            color: white;
+        }
+        .loader {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-card {
+            border-left: 4px solid #3b82f6;
+        }
+        .prototype-card {
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                AI Market Research & Prototype Generator
+            </h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Enter a topic to generate comprehensive market research on AI workflow automation opportunities, 
+                then automatically create prototypes for identified product ideas.
+            </p>
+        </header>
+
+        <!-- Input Section -->
+        <div class="max-w-2xl mx-auto mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <label for="topic-input" class="block text-lg font-semibold text-gray-700 mb-4">
+                    Research Topic
+                </label>
+                <input 
+                    type="text" 
+                    id="topic-input" 
+                    placeholder="e.g., partnership tax compliance, healthcare workflow automation, legal document processing..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                >
+                <button 
+                    id="start-research" 
+                    class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    Start AI Research & Prototype Generation
+                </button>
+            </div>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div id="progress-section" class="max-w-4xl mx-auto mb-12 hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Progress</h2>
+                <div class="flex flex-wrap justify-between items-center space-y-2 md:space-y-0">
+                    <div class="progress-step flex items-center space-x-2 px-4 py-2 rounded-full bg-gray-200 text-gray-600">
+                        <span class="w-6 h-6 rounded-full bg-gray-400 text-white text-sm flex items-center justify-center">1</span>
+                        <span>Gemini Research</span>
+                    </div>
+                    <div class="progress-step flex items-center space-x-2 px-4 py-2 rounded-full bg-gray-200 text-gray-600">
+                        <span class="w-6 h-6 rounded-full bg-gray-400 text-white text-sm flex items-center justify-center">2</span>
+                        <span>Extract Ideas</span>
+                    </div>
+                    <div class="progress-step flex items-center space-x-2 px-4 py-2 rounded-full bg-gray-200 text-gray-600">
+                        <span class="w-6 h-6 rounded-full bg-gray-400 text-white text-sm flex items-center justify-center">3</span>
+                        <span>Generate Prototypes</span>
+                    </div>
+                    <div class="progress-step flex items-center space-x-2 px-4 py-2 rounded-full bg-gray-200 text-gray-600">
+                        <span class="w-6 h-6 rounded-full bg-gray-400 text-white text-sm flex items-center justify-center">4</span>
+                        <span>Complete</span>
+                    </div>
+                </div>
+                <div id="current-status" class="mt-6 text-center">
+                    <div class="loader mx-auto mb-4"></div>
+                    <p class="text-gray-600">Initializing research...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results-section" class="max-w-6xl mx-auto hidden">
+            <!-- Gemini Research Results -->
+            <div id="research-results" class="mb-12">
+                <div class="bg-white rounded-xl shadow-lg p-8 result-card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-semibold text-gray-800">Market Research Results</h2>
+                        <button id="export-research" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">
+                            Export Research
+                        </button>
+                    </div>
+                    <div id="research-content" class="prose prose-lg max-w-none">
+                        <!-- Research content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extracted Ideas -->
+            <div id="extracted-ideas" class="mb-12 hidden">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Extracted Product Ideas</h2>
+                    <div id="ideas-list" class="space-y-4">
+                        <!-- Extracted ideas will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prototype Results -->
+            <div id="prototype-results" class="mb-12">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-semibold text-gray-800">Generated Prototypes</h2>
+                        <button id="export-prototypes" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-200">
+                            Export All Prototypes
+                        </button>
+                    </div>
+                    <div id="prototypes-container" class="space-y-8">
+                        <!-- Prototype results will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Configuration Modal -->
+        <div id="api-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+                <h3 class="text-xl font-semibold mb-4">API Configuration</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Gemini API Key</label>
+                        <input type="password" id="gemini-api-key" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Perplexity API Key</label>
+                        <input type="password" id="perplexity-api-key" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div class="flex space-x-4 mt-6">
+                    <button id="save-api-keys" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-200">
+                        Save & Continue
+                    </button>
+                    <button id="cancel-api-modal" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition duration-200">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api-keys.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
