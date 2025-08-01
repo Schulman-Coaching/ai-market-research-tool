@@ -362,14 +362,14 @@ Focus on creating a practical, implementable solution that could be developed as
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-sonar-small-128k-chat',
+                    model: 'sonar-small-chat',
                     messages: [
                         {
                             role: 'user',
                             content: prompt
                         }
                     ],
-                    max_tokens: 2000,
+                    max_tokens: 1000,
                     temperature: 0.2
                 })
             });
