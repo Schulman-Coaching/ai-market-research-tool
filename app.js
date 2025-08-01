@@ -362,24 +362,15 @@ Focus on creating a practical, implementable solution that could be developed as
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-sonar-large-128k-online',
+                    model: 'llama-3.1-sonar-small-128k-online',
                     messages: [
                         {
                             role: 'user',
                             content: prompt
                         }
                     ],
-                    max_tokens: 2000,
-                    temperature: 0.2,
-                    top_p: 0.9,
-                    return_citations: false,
-                    return_images: false,
-                    return_related_questions: false,
-                    search_recency_filter: "month",
-                    top_k: 0,
-                    stream: false,
-                    presence_penalty: 0,
-                    frequency_penalty: 1
+                    max_tokens: 1000,
+                    temperature: 0.2
                 })
             });
 
