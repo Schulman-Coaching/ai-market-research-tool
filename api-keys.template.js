@@ -1,17 +1,17 @@
-// API Keys Configuration
-// IMPORTANT: Keep this file secure and do not share it publicly
+// API Keys Configuration Template
+// IMPORTANT: Copy this file to 'api-keys.js' and add your actual API keys
 
 const API_KEYS = {
-    // Your Gemini API key
-    GEMINI_API_KEY: 'AIzaSyDySGZBwsObvjj50sJQRgrG_W5fXGXkTAo',
+    // Replace with your actual Gemini API key from https://aistudio.google.com/app/apikey
+    GEMINI_API_KEY: 'YOUR_GEMINI_API_KEY_HERE',
     
-    // Your Perplexity API key
-    PERPLEXITY_API_KEY: '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'
+    // Replace with your actual Perplexity API key from https://www.perplexity.ai/settings/api
+    PERPLEXITY_API_KEY: 'YOUR_PERPLEXITY_API_KEY_HERE'
 };
 
 // Auto-populate API keys if they are configured
 if (typeof window !== 'undefined') {
-    // Always set the Gemini API key
+    // Set Gemini API key if configured
     if (API_KEYS.GEMINI_API_KEY && API_KEYS.GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE') {
         localStorage.setItem('gemini-api-key', API_KEYS.GEMINI_API_KEY);
     }
