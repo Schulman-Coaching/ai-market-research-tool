@@ -1,5 +1,8 @@
 # AI Market Research & Prototype Generator
 
+## ✅ **STATUS: FULLY FUNCTIONAL**
+**Latest Update**: Successfully resolved Perplexity API integration! The complete end-to-end workflow is now working perfectly with the `sonar` model.
+
 A powerful web-based tool that automates the process of conducting market research and generating product prototypes using AI. Enter any topic, and the tool will:
 
 1. **Generate comprehensive market research** using Google's Gemini AI
