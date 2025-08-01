@@ -362,20 +362,32 @@ Focus on creating a practical, implementable solution that could be developed as
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-sonar-large-128k-online',
+                    model: 'llama-3.1-sonar-small-128k-online',
                     messages: [
                         {
                             role: 'user',
                             content: prompt
                         }
                     ],
-                    max_tokens: 4000,
-                    temperature: 0.7
+                    max_tokens: 2000,
+                    temperature: 0.2,
+                    top_p: 0.9,
+                    return_citations: false,
+                    search_domain_filter: ["perplexity.ai"],
+                    return_images: false,
+                    return_related_questions: false,
+                    search_recency_filter: "month",
+                    top_k: 0,
+                    stream: false,
+                    presence_penalty: 0,
+                    frequency_penalty: 1
                 })
             });
 
             if (!response.ok) {
-                throw new Error(`Perplexity API error: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.error('Perplexity API Error Response:', errorText);
+                throw new Error(`Perplexity API error: ${response.status} ${response.statusText} - ${errorText}`);
             }
 
             const data = await response.json();
